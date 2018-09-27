@@ -1161,7 +1161,7 @@ try
     clear handles.maskedRanges;
     guidata(hObject, handles);
     
-    handles.bwContour = imdilate(handles.bwContour,true(50,50));
+    %handles.bwContour = imdilate(handles.bwContour,true(50,50));
     
     [a b c] = size(handles.img);
     empties = zeros([1,c]);
@@ -1197,7 +1197,7 @@ try
         handles.bwContour(:,:,start+1:stop-1) = bwTemp;
     end
     
-    handles.bwContour = imerode(handles.bwContour,true(47,47));
+    %handles.bwContour = imerode(handles.bwContour,true(47,47));
     guidata(hObject, handles);
     UpdateImage(hObject, eventdata, handles);
     set(handles.textBusy,'String','Not Busy');
