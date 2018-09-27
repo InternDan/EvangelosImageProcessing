@@ -3,16 +3,17 @@ function [hObject,eventdata,handles] = SetCurrentSliceToWidest(hObject,eventdata
 [a b c] = size(handles.bwContour);
 slice = 0;
 distPrev = 0;
+maxDist = 0;
 for i = 1:c
 	bw = handles.bwContour(:,:,i);
-	[x y] = ind2sub(size(bw),find(bw));
-	dist(i) = max(y) - min(y);
-	if dist(i) > distPrev
-		slice = i;
-		distPrev = dist(i);
-	else
-		distPrev = dist(i);
-	end
+    if length(find(bw)) > 0
+        [x y] = ind2sub(size(bw),find(bw));
+        dist = max(y) - min(y);
+        if dist > maxDist
+            slice = i;
+            maxDist = dist;
+        end
+    end
 end
 
 handles.slice = slice;

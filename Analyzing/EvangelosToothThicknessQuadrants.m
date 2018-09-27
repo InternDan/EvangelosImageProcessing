@@ -28,13 +28,16 @@ function [hObject, eventdata,handles] = EvangelosToothThicknessQuadrants(hObject
 %end
 
 handles.imgOrig = handles.img;
-handles.img(~handles.bwContour) = 0;
+handles.img(~handles.bwContour) = int32(0);
 handles.bwContourSectioner = handles.bwContour;
 handles.bwContour = handles.img > handles.lowerThreshold;
 [x,y,v] = ind2sub(size(handles.bwContour),find(handles.bwContour));
 center = [mean(x),mean(y)];
 [hObject,eventdata,handles] = CorticalAnalysisEvangelos(hObject,eventdata,handles,center);
 handles.img = handles.imgOrig;
-handles.img(handles.bwContourSectioner) = 0;
+handles.img(handles.bwContourSectioner) = int32(0);
+handles.bwContour = handles.bwContourSectioner;
+
+guidata(hObject, handles);
 
     
